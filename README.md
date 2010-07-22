@@ -8,7 +8,7 @@ This plugin allows the generation of pdf files from controllers using the pdf mi
 
 For RoR:
 
-  script/plugin install git@github.com:amkirwan/rendermonkey_too.git
+    script/plugin install git@github.com:amkirwan/rendermonkey_too.git
 
 
 ### Example
@@ -17,16 +17,16 @@ Add for example the following to your controller
 
 Both :pdf_template and :pdf_layout should be specified
 
-  class ExampleController < ApplicationController
-    def show
-        respond_to do |format|
-          format.html # index.html.erb
-          format.pdf  do
-            render :pdf_template => "reports/phone_list.pdf.erb", 
-                   :pdf_layout => "reports.pdf.erb" 
-          end
+    class ExampleController < ApplicationController
+        def show
+            respond_to do |format|
+                format.html # index.html.erb
+                format.pdf  do
+                    render :pdf_template => "reports/phone_list.pdf.erb", 
+                    pdf_layout => "reports.pdf.erb" 
+                end
+            end
         end
     end
-  end
 
 Copyright (c) 2010 [name of plugin creator], released under the MIT license
