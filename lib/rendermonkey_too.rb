@@ -10,7 +10,8 @@ module RendermonkeyToo
   end
   
   def render_with_rendermonkey_too(options = nil, *args, &block)
-    if options.is_a?(Hash) && options.has_key?(:pdf_layout)
+    if options.is_a?(Hash) && options.has_key?(:pdf_template)
+      logger.info '*'*15 + 'RENDERMONKEY_TOO' + '*'*15
         make_pdf_erb(options)
       else
         render_without_rendermonkey_too(options, *args, &block)
@@ -20,7 +21,6 @@ module RendermonkeyToo
   private
    
   def make_pdf_erb(options = {})
-    logger.info '*'*15 + 'make_pdf_erb' + '*'*15
     options[:pdf_layout] ||= false
     options[:pdf_template] ||= File.join(controller_path, action_name)
     render :text => render_to_string(:template => options[:pdf_template], :layout => options[:pdf_layout])
