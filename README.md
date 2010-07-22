@@ -6,6 +6,8 @@ This plugin allows the generation of pdf files from controllers using the pdf mi
 
 ### Installation
 
+For RoR:
+
   script/plugin install git@github.com:amkirwan/rendermonkey_too.git
 
 
