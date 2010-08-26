@@ -40,12 +40,17 @@ module TooRendermonkey
     req.form_data = params
     http = Net::HTTP.new(url.host, url.port)
      #http.use_ssl = true
-    response = http.start {|http| http.request(req)}
-    if response.content_type == "text/html"
-      logger.info '*'*15 +  response.body + '*'*15
+    begin
+      response = http.start {|http| http.request(req)}
+      if response.content_type == "text/html"
+        logger.info '*'*15 +  response.body + '*'*15
+        render :file => "public/500.html"
+      else
+        send_data response.body, :type => 'pdf', :disposition => 'attachment'
+      end
+    rescue => e
+      logger.info '*'*15 + "ERROR GENERATING PDF: " + e.message + '*'*15
       render :file => "public/500.html"
-    else
-      send_data response.body, :type => 'pdf', :disposition => 'attachment'
     end
   end
   
