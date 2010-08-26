@@ -1,9 +1,7 @@
-class TooRendermonkeyGenerator < Rails::Generator::NamedBase
+class TooRendermonkeyGenerator < Rails::Generator::Base
   def manifest
     record do |m|
-      m.file "rendermonkey_too.rb", "config/initializers/rendermonkey_too.rb"
-      # m.directory "lib"
-      # m.template 'README', "README"
+      m.file "too_rendermonkey.rb", "config/initializers/too_rendermonkey.rb"
     end
   end
 end
