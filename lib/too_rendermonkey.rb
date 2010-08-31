@@ -32,7 +32,8 @@ module TooRendermonkey
     options[:pdf_layout] ||= false
     options[:pdf_template] ||= File.join(controller_path, action_name)
     page = render_to_string(:template => options[:pdf_template], :layout => options[:pdf_layout])
-    
+
+=begin
     params = generate_params(options, page)
     
     url = URI.parse(@@config[:uri])
@@ -53,6 +54,16 @@ module TooRendermonkey
       render :file => "public/500.html"
     end
   end
+=end
+    params = generate_params(options, page)
+    begin
+      response = RestClient.post @@config[:uri], params
+      send_data response, :type => 'pdf', :disposition => 'attachment'
+    rescue => e
+      logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
+      render :file => "public/500.html"
+    end
+  end
   
   def generate_params(options, page)
     params = {}
@@ -60,13 +71,22 @@ module TooRendermonkey
     params["page"] = page
     params["api_key"] = @@config[:api_key]
     params["timestamp"] = Time.now.utc.iso8601
+    process_options(params, options)
     params["signature"] = generate_signature(params)
     params
   end
   
+  def process_options(params, options) 
+    if !options[:options].nil? && !options[:options].empty?
+      options[:options].each do |key, value|
+        params[key.to_s] = value.to_s
+      end
+    end
+  end
+  
   def generate_signature(params)
     c_q = canonical_querystring(params)
-    
+
     if @@config[:hash_key].size == 44
   		#logger.info '*'*10 + "Using SHA256"
   		hashtype = 'SHA256'
