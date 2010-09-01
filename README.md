@@ -29,7 +29,7 @@ In your controller within the action that you want to generate a PDF you would n
 					rener :name => "Phone List",
 						  :pdf_layout => "reports.pdf.erb",
 						  :pdf_template => "reports/phone_list.pdf.erb",
-						  :options => {
+						  :render_options => {
 							:header_right => 'Page [page] of [toPage]',
 							:grayscale => true
 						  }

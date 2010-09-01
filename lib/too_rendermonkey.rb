@@ -71,14 +71,14 @@ module TooRendermonkey
     params["page"] = page
     params["api_key"] = @@config[:api_key]
     params["timestamp"] = Time.now.utc.iso8601
-    process_options(params, options)
+    process_render_options(params, options)
     params["signature"] = generate_signature(params)
     params
   end
   
-  def process_options(params, options) 
-    if !options[:options].nil? && !options[:options].empty?
-      options[:options].each do |key, value|
+  def process_render_options(params, options) 
+    if !options[:render_options].nil? && !options[:render_options].empty?
+      options[:render_options].each do |key, value|
         params[key.to_s] = value.to_s
       end
     end
