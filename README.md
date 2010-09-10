@@ -17,6 +17,14 @@ The generate will install a file in config/initializers/too_rendermonkey.rb. The
 
 
 ### Example
+                                            
+Setup the Rails initializer config/initializers/too_rendermonkey.rb after running script/generate too_rendermonkey. Use your API info from RendermonkeyToo to configure. Make sure to keep the hash_key secure. Anytime you edit this file you will need to restart the server.
+
+	TooRendermonkey.config = {
+  		:uri => "http://localhost:4567/generate",
+  		:api_key => "abcdefg",
+  		:hash_key => "abcdefg123456789"
+	}
 
 In your controller within the action that you want to generate a PDF you would need to specify the following
 *Both :pdf_template and :pdf_layout need to be specified*
