@@ -2,7 +2,7 @@
 
 ## Generator Path
 TooRendermonkey.config = {
-  #:uri => "http://localhost:4567/generate",
+  #:uri => "https://rendermonkey-too.heroku.com/generate",
   #:api_key => "example1234example",
   #:hash_key => "example1234example"
 }
