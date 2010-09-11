@@ -4,7 +4,8 @@ require 'net/http'
 require 'openssl'
 require 'digest/sha2'
 require 'base64'
-require 'time'
+require 'time'  
+require 'rest-client'
 
 # RendermonkeyToo
 module TooRendermonkey
