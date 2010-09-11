@@ -4,5 +4,5 @@
 TooRendermonkey.config = {
   #:uri => "http://localhost:4567/generate",
   #:api_key => "example1234example",
-  #:secret_key => "example1234example"
+  #:hash_key => "example1234example"
 }
