@@ -30,13 +30,14 @@ Gem::Specification.new do |s|
     "generators/too_rendermonkey/USAGE",
     "generators/too_rendermonkey/templates/too_rendermonkey.rb",
     "generators/too_rendermonkey/too_rendermonkey_generator.rb",
-    "init.rb",
     "install.rb",
     "lib/too_rendermonkey.rb",
     "lib/too_rendermonkey_css.rb",
+    "rails/init.rb",
     "tasks/rendermonkey_too_tasks.rake",
     "test/rendermonkey_too_test.rb",
     "test/test_helper.rb",
+    "too_rendermonkey.gemspec",
     "uninstall.rb"
   ]
   s.homepage = %q{http://github.com/amkirwan/too_rendermonkey}

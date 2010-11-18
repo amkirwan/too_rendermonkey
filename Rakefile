@@ -17,7 +17,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{Forward HTML renderer to RendemonkeyToo server}
   gem.email = "amkirwan@gmail.com"
-  gem.authors = ["Anthony Kirwan"]
+  gem.authors = ["Anthony Kirwan"] 
   gem.description = %Q{This plugin allows the generation of pdf files from controllers using the pdf mime type. 
   This plugin will not generate a pdf but will render the pages specified for the pdf format 
   with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API 

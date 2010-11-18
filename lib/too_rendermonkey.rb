@@ -10,7 +10,7 @@ require 'rest-client'
 # RendermonkeyToo
 module TooRendermonkey
   
-  mattr_accessor :config
+  mattr_accessor :config   
 
   def self.included(base)
     base.class_eval do
@@ -22,9 +22,9 @@ module TooRendermonkey
     if options.is_a?(Hash) && options.has_key?(:pdf_template)
       logger.info '*'*15 + 'TOO_RENDERMONKEY' + '*'*15
         make_pdf_erb(options)
-      else
-        render_without_rendermonkey_too(options, *args, &block)
-      end
+    else
+      render_without_rendermonkey_too(options, *args, &block)
+    end   
   end
   
   private
