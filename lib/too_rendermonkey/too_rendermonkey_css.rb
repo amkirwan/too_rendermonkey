@@ -6,8 +6,7 @@ module TooRendermonkeyCss
       File.open("#{Rails.root.to_s}/public/stylesheets/#{stylesheet}.css", "r") {|f|
         css_file = f.read
       }
-      css_file = '<style type="text/css">' + css_file + '</style>' 
-      render :text => css_file
+      "<style type=\"text/css\"> #{css_file} </style>".html_safe       
     rescue => err
       puts "Exception: #{err}"
       err
