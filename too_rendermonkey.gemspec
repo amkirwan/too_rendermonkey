@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{too_rendermonkey}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anthony Kirwan"]
-  s.date = %q{2010-11-22}
+  s.date = %q{2010-11-30}
   s.description = %q{This plugin allows the generation of pdf files from controllers using the pdf mime type. 
   This plugin will not generate a pdf but will render the pages specified for the pdf format 
   with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API 
@@ -32,6 +32,11 @@ Gem::Specification.new do |s|
     "generators/too_rendermonkey/too_rendermonkey_generator.rb",
     "init.rb",
     "install.rb",
+    "lib/too_rendermonkey.rb",
+    "lib/too_rendermonkey/pdf_generator.rb",
+    "lib/too_rendermonkey/railtie.rb",
+    "lib/too_rendermonkey/too_rendermonkey_css.rb",
+    "lib/too_rendermonkey_back.rb",
     "lib/too_rendermonkey_css.rb",
     "rails/init.rb",
     "tasks/rendermonkey_too_tasks.rake",
