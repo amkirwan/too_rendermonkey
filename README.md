@@ -1,6 +1,8 @@
 # TooRendermonkey
 
-## PDF template generation plugin for Ruby on Rails
+## PDF template generation plugin for Ruby on Rails 
+
+### Master tracks Rails 3. Branch Rails 2 tracks >= Rails 2.3.5
 
 This plugin allows the generation of pdf files from controllers using the pdf mime type. This plugin will not generate a pdf but will render the pages specified for the pdf format with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API which will generate this page as a PDF. This is useful for having a separate server generate PDF files from your Ruby on Rails application. This allows for custom PDF files to be generated for the specified page.
 
