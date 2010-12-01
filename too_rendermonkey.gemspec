@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anthony Kirwan"]
-  s.date = %q{2010-11-30}
+  s.date = %q{2010-12-01}
   s.description = %q{This plugin allows the generation of pdf files from controllers using the pdf mime type. 
   This plugin will not generate a pdf but will render the pages specified for the pdf format 
   with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API 
@@ -27,11 +27,10 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "generators/too_rendermonkey/USAGE",
-    "generators/too_rendermonkey/templates/too_rendermonkey.rb",
-    "generators/too_rendermonkey/too_rendermonkey_generator.rb",
-    "init.rb",
     "install.rb",
+    "lib/generators/too_rendermonkey/USAGE",
+    "lib/generators/too_rendermonkey/templates/too_rendermonkey.rb",
+    "lib/generators/too_rendermonkey/too_rendermonkey_generator.rb",
     "lib/too_rendermonkey.rb",
     "lib/too_rendermonkey/pdf_generator.rb",
     "lib/too_rendermonkey/railtie.rb",
@@ -60,12 +59,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.1"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.1"])
     else
+      s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
@@ -73,6 +74,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
     end
   else
+    s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.1"])

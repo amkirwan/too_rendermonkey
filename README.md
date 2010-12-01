@@ -4,10 +4,13 @@
 
 This plugin allows the generation of pdf files from controllers using the pdf mime type. This plugin will not generate a pdf but will render the pages specified for the pdf format with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API which will generate this page as a PDF. This is useful for having a separate server generate PDF files from your Ruby on Rails application. This allows for custom PDF files to be generated for the specified page.
 
-### Installation
-	gem install rest-client
-    script/plugin install git@github.com:amkirwan/too_rendermonkey.git
-	script/generate too_rendermonkey
+### Installation as gem
+	gem install too_rendermonkey
+	rails generate too_rendermonkey  
+	
+### Installation as plugin
+    rails plugin install git://github.com/amkirwan/too_rendermonkey.git
+    rails generate too_rendermonkey
 
 The generate will install a file in config/initializers/too_rendermonkey.rb. The following params must be specified in this file to generate PDFs using the RendermonkeyToo API.
 
@@ -27,14 +30,14 @@ Setup the Rails initializer config/initializers/too_rendermonkey.rb after runnin
 	}
 
 In your controller within the action that you want to generate a PDF you would need to specify the following
-*Both :pdf_template and :pdf_layout need to be specified*
+*render :pdf, :pdf_template and :pdf_layout need to be specified*
 
     class ExampleController < ApplicationController
         def show
             respond_to do |format|
                 format.html #index.html.erb
                 format.pdf  do
-					rener :name => "Phone List",
+				   render :pdf  => "Phone List",
 						  :pdf_layout => "reports.pdf.erb",
 						  :pdf_template => "reports/phone_list.pdf.erb",
 						  :render_options => {
