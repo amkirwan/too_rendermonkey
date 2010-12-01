@@ -1,10 +1,10 @@
 module PDFGenerator 
 
-  def make_pdf_erb(options = {})     
+  def make_pdf_erb(pdf_name, options = {})     
     options[:pdf_layout] ||= false
     options[:pdf_template] ||= File.join(controller_path, action_name)
     page = render_to_string(:template => options[:pdf_template], :layout => options[:pdf_layout])
-    params = generate_params(options, page)
+    params = generate_params(pdf_name, options, page)
     begin
       response = RestClient.post TooRendermonkey.configure[:uri], params
       send_data response, :type => 'application/pdf', :disposition => 'attachment'
@@ -14,9 +14,9 @@ module PDFGenerator
     end
   end
 
-  def generate_params(options, page)
+  def generate_params(pdf_name, options, page)
     params = {}
-    params["name"] = options[:name] if options.has_key?(:name)
+    params["name"] = pdf_name
     params["page"] = page
     params["api_key"] = TooRendermonkey.configure[:api_key]
     params["timestamp"] = Time.now.utc.iso8601

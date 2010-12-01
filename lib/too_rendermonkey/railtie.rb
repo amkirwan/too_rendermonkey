@@ -20,8 +20,8 @@ module Rails
     class RailTie < ::Rails::Railtie  
            
       initializer "add pdf renderer" do           
-        ActionController::Renderers.add :pdf do |action, options|     
-          make_pdf_erb(options)
+        ActionController::Renderers.add :pdf do |pdf_name, options|     
+          make_pdf_erb(pdf_name, options)
         end  
         Mime::Type.register 'application/pdf', :pdf 
       end  
