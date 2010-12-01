@@ -2,7 +2,7 @@ Description:
     Creates a initializer to specify the api_key and hash_key(secret key) to generate PDF requests on the rendermonkey_too server.
 
 Example:
-    ./script/generate rendermonkey_too
+    rails generate too_rendermonkey 
 
     This will create:
         config/initializers/too_rendermonkey.rb

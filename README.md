@@ -11,8 +11,12 @@ This plugin allows the generation of pdf files from controllers using the pdf mi
 ### Installation as plugin
     rails plugin install git://github.com/amkirwan/too_rendermonkey.git
     rails generate too_rendermonkey
+    
+    #In your Rails project Gemfile add
+    gem 'too_rendermonkey', :path=>'vendor/plugins/too_rendermonkey'
+    
 
-The generate will install a file in config/initializers/too_rendermonkey.rb. The following params must be specified in this file to generate PDFs using the RendermonkeyToo API.
+Generate will install a file in config/initializers/too_rendermonkey.rb. The following params must be specified in this file to generate PDFs using the RendermonkeyToo API.
 
 * URI of the RendermonkeyToo instance which is running
 * api_key given from the RendermonkeyToo API
