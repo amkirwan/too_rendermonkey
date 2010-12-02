@@ -59,7 +59,7 @@ module TooRendermonkey
     params = generate_params(options, page)
     begin
       response = RestClient.post @@config[:uri], params
-      send_data response, :type => 'application/pdf', :disposition => 'attachment'
+      send_data response, :type => 'application/pdf', :disposition => "#{response.headers[:content_disposition]}"
     rescue => e
       logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
       render :file => "public/500.html"
