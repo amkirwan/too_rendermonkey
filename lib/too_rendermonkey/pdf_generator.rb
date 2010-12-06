@@ -15,11 +15,11 @@ module PDFGenerator
   end
 
   def generate_params(pdf_name, options, page)
-    @pdf_params = {}
-    @pdf_params["name"] = pdf_name
-    @pdf_params["page"] = page
-    @pdf_params["api_key"] = TooRendermonkey.configure[:api_key]
-    @pdf_params["timestamp"] = Time.now.utc.iso8601
+    @pdf_params = {
+      "name" => pdf_name,
+      "page" => page,
+      "api_key" => TooRendermonkey.configure[:api_key],
+      "timestamp" => Time.now.utc.iso8601 }
     process_render_options(@pdf_params, options)
     @pdf_params["signature"] = generate_signature(pdf_params)
     @pdf_params
