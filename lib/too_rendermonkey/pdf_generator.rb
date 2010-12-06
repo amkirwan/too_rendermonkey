@@ -1,4 +1,4 @@
-module PDFGenerator 
+module PDFGenerator     
 
   def make_pdf_erb(pdf_name, options = {})     
     options[:pdf_layout] ||= false
@@ -8,21 +8,25 @@ module PDFGenerator
     begin
       response = RestClient.post TooRendermonkey.configure[:uri], params
       send_data response, :type => 'application/pdf', :disposition => "#{response.headers[:content_disposition]}"
-    rescue => e
+    rescue => e     
       logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
-      render :file => "public/500.html"
+      render :file => "public/500.html", :status => 500
     end
   end
 
   def generate_params(pdf_name, options, page)
-    params = {}
-    params["name"] = pdf_name
-    params["page"] = page
-    params["api_key"] = TooRendermonkey.configure[:api_key]
-    params["timestamp"] = Time.now.utc.iso8601
-    process_render_options(params, options)
-    params["signature"] = generate_signature(params)
-    params
+    @pdf_params = {}
+    @pdf_params["name"] = pdf_name
+    @pdf_params["page"] = page
+    @pdf_params["api_key"] = TooRendermonkey.configure[:api_key]
+    @pdf_params["timestamp"] = Time.now.utc.iso8601
+    process_render_options(@pdf_params, options)
+    @pdf_params["signature"] = generate_signature(pdf_params)
+    @pdf_params
+  end    
+  
+  def pdf_params 
+    @pdf_params
   end
 
   def process_render_options(params, options) 

@@ -17,16 +17,15 @@ require "too_rendermonkey_css"
 
 module Rails  
   module TooRendermonkey 
-    class RailTie < ::Rails::Railtie  
-           
-      initializer "add pdf renderer" do           
+    class Railtie < ::Rails::Railtie             
+      initializer "add pdf renderer" do         
         ActionController::Renderers.add :pdf do |pdf_name, options|     
           make_pdf_erb(pdf_name, options)
         end  
         Mime::Type.register 'application/pdf', :pdf 
       end  
 
-      config.to_prepare do 
+      config.to_prepare do    
         ActionController::Base.send :include, PDFGenerator
         ActionView::Base.send :include, TooRendermonkeyCss
       end 
