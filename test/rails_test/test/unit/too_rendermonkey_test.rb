@@ -7,6 +7,8 @@ class TooRendermonkeyTest < ActiveSupport::TestCase
     assert TooRendermonkey.configure, "Foobar"
   end  
   
+  
+  
 end
 
 

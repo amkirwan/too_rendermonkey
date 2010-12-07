@@ -9,7 +9,7 @@ module TooRendermonkeyCss
       "<style type=\"text/css\"> #{css_file} </style>".html_safe       
     rescue => err
       puts "Exception: #{err}"
-      err
+      "<style type=\"text/css\"></style>".html_safe
     end
   end
   

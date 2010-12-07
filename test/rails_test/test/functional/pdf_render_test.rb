@@ -7,7 +7,13 @@ class PdfRenderTest < ActionController::TestCase
     @controller = PDFRenderController.new
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new     
-    @filename = "abc"
+    @filename = "abc" 
+    
+    TooRendermonkey.configure = {
+      :uri => "http://localhost:4567/generate",
+      :api_key => "835a3161dc4e71b",
+      :hash_key => "sQQTe93eWcpV4Gr5HDjKUh8vu2aNDOvn3+suH1Tc4P4="
+    } 
   end                                           
   
   def teardown
@@ -60,6 +66,18 @@ class PdfRenderTest < ActionController::TestCase
     request_fail 
     get :render_pdf, :format => :pdf      
     assert_response :error 
-  end   
+  end     
+  
+  test "should render 500 on missing configure key" do  
+    TooRendermonkey.configure.delete(:api_key)  
+    get :render_pdf, :format => :pdf
+    assert_response :error
+  end  
+  
+  test "should render 500 on incorrect hash_key" do  
+    TooRendermonkey.configure[:hash_key] = "abcdefg"  
+    get :render_pdf, :format => :pdf
+    assert_response :error
+  end
   
 end
