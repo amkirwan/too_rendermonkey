@@ -1,4 +1,4 @@
-class PdfRenderController < ApplicationController  
+class PDFRenderController < ApplicationController  
   def render_pdf   
     respond_to do |format|  
       format.pdf do          

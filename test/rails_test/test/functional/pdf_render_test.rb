@@ -4,7 +4,7 @@ require 'rest-client'
 class PdfRenderTest < ActionController::TestCase
 
   def setup
-    @controller = PdfRenderController.new
+    @controller = PDFRenderController.new
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new     
     @filename = "abc"

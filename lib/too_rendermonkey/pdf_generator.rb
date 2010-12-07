@@ -1,4 +1,6 @@
-module PDFGenerator     
+module PDFGenerator    
+  
+  attr_reader :pdf_params
 
   def make_pdf_erb(pdf_name, options = {})     
     options[:pdf_layout] ||= false
@@ -15,24 +17,19 @@ module PDFGenerator
   end
 
   def generate_params(pdf_name, options, page)
-    @pdf_params = {
-      "name" => pdf_name,
-      "page" => page,
-      "api_key" => TooRendermonkey.configure[:api_key],
-      "timestamp" => Time.now.utc.iso8601 }
-    process_render_options(@pdf_params, options)
-    @pdf_params["signature"] = generate_signature(pdf_params)
+    @pdf_params = { "name" => pdf_name,
+                    "page" => page,
+                    "api_key" => TooRendermonkey.configure[:api_key],
+                    "timestamp" => Time.now.utc.iso8601 }
+    process_render_options(options)
+    @pdf_params["signature"] = generate_signature(@pdf_params)
     @pdf_params
   end    
-  
-  def pdf_params 
-    @pdf_params
-  end
 
-  def process_render_options(params, options) 
+  def process_render_options(options) 
     if !options[:render_options].nil? && !options[:render_options].empty?
       options[:render_options].each do |key, value|
-        params[key.to_s] = value.to_s
+        @pdf_params[key.to_s] = value.to_s
       end
     end
   end

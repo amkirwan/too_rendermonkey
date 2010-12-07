@@ -2,8 +2,7 @@ require 'test_helper'
 require 'active_support'      
 
 class InitializerTest < ActiveSupport::TestCase 
-  
-    
+     
   test "too rendermonkey initialize" do
     assert_equal 'application/pdf', Mime.const_get(:PDF)
   end 
