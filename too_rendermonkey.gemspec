@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{too_rendermonkey}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anthony Kirwan"]
-  s.date = %q{2010-12-01}
+  s.date = %q{2010-12-07}
   s.description = %q{This plugin allows the generation of pdf files from controllers using the pdf mime type. 
   This plugin will not generate a pdf but will render the pages specified for the pdf format 
   with the extension .pdf.erb as html and forward the request on to the RendermonkeyToo API 
@@ -32,15 +32,65 @@ Gem::Specification.new do |s|
     "lib/generators/too_rendermonkey/templates/too_rendermonkey.rb",
     "lib/generators/too_rendermonkey/too_rendermonkey_generator.rb",
     "lib/too_rendermonkey.rb",
+    "lib/too_rendermonkey/exceptions.rb",
     "lib/too_rendermonkey/pdf_generator.rb",
     "lib/too_rendermonkey/railtie.rb",
     "lib/too_rendermonkey/too_rendermonkey_css.rb",
-    "lib/too_rendermonkey_back.rb",
-    "lib/too_rendermonkey_css.rb",
-    "rails/init.rb",
-    "tasks/rendermonkey_too_tasks.rake",
-    "test/rendermonkey_too_test.rb",
-    "test/test_helper.rb",
+    "test/rails_test/.gitignore",
+    "test/rails_test/Gemfile",
+    "test/rails_test/Gemfile.lock",
+    "test/rails_test/README",
+    "test/rails_test/Rakefile",
+    "test/rails_test/app/controllers/application_controller.rb",
+    "test/rails_test/app/controllers/pdf_render_controller.rb",
+    "test/rails_test/app/helpers/application_helper.rb",
+    "test/rails_test/app/views/layouts/application.html.erb",
+    "test/rails_test/app/views/layouts/reports_layout.pdf.erb",
+    "test/rails_test/app/views/reports/report.pdf.erb",
+    "test/rails_test/config.ru",
+    "test/rails_test/config/application.rb",
+    "test/rails_test/config/boot.rb",
+    "test/rails_test/config/database.yml",
+    "test/rails_test/config/environment.rb",
+    "test/rails_test/config/environments/development.rb",
+    "test/rails_test/config/environments/production.rb",
+    "test/rails_test/config/environments/test.rb",
+    "test/rails_test/config/initializers/backtrace_silencers.rb",
+    "test/rails_test/config/initializers/inflections.rb",
+    "test/rails_test/config/initializers/mime_types.rb",
+    "test/rails_test/config/initializers/secret_token.rb",
+    "test/rails_test/config/initializers/session_store.rb",
+    "test/rails_test/config/initializers/too_rendermonkey.rb",
+    "test/rails_test/config/locales/en.yml",
+    "test/rails_test/config/routes.rb",
+    "test/rails_test/db/schema.rb",
+    "test/rails_test/db/seeds.rb",
+    "test/rails_test/doc/README_FOR_APP",
+    "test/rails_test/lib/tasks/.gitkeep",
+    "test/rails_test/public/404.html",
+    "test/rails_test/public/422.html",
+    "test/rails_test/public/500.html",
+    "test/rails_test/public/favicon.ico",
+    "test/rails_test/public/images/rails.png",
+    "test/rails_test/public/index.html",
+    "test/rails_test/public/javascripts/application.js",
+    "test/rails_test/public/javascripts/controls.js",
+    "test/rails_test/public/javascripts/dragdrop.js",
+    "test/rails_test/public/javascripts/effects.js",
+    "test/rails_test/public/javascripts/prototype.js",
+    "test/rails_test/public/javascripts/rails.js",
+    "test/rails_test/public/robots.txt",
+    "test/rails_test/public/stylesheets/.gitkeep",
+    "test/rails_test/public/stylesheets/reports_pdf.css",
+    "test/rails_test/script/rails",
+    "test/rails_test/test/functional/abc.pdf",
+    "test/rails_test/test/functional/pdf_render_test.rb",
+    "test/rails_test/test/test_helper.rb",
+    "test/rails_test/test/unit/initializer_test.rb",
+    "test/rails_test/test/unit/pdf_generator_test.rb",
+    "test/rails_test/test/unit/too_rendermonkey_css_test.rb",
+    "test/rails_test/test/unit/too_rendermonkey_test.rb",
+    "test/rails_test/vendor/plugins/.gitkeep",
     "too_rendermonkey.gemspec",
     "uninstall.rb"
   ]
@@ -50,8 +100,30 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Forward HTML renderer to RendemonkeyToo server}
   s.test_files = [
-    "test/rendermonkey_too_test.rb",
-    "test/test_helper.rb"
+    "test/rails_test/app/controllers/application_controller.rb",
+    "test/rails_test/app/controllers/pdf_render_controller.rb",
+    "test/rails_test/app/helpers/application_helper.rb",
+    "test/rails_test/config/application.rb",
+    "test/rails_test/config/boot.rb",
+    "test/rails_test/config/environment.rb",
+    "test/rails_test/config/environments/development.rb",
+    "test/rails_test/config/environments/production.rb",
+    "test/rails_test/config/environments/test.rb",
+    "test/rails_test/config/initializers/backtrace_silencers.rb",
+    "test/rails_test/config/initializers/inflections.rb",
+    "test/rails_test/config/initializers/mime_types.rb",
+    "test/rails_test/config/initializers/secret_token.rb",
+    "test/rails_test/config/initializers/session_store.rb",
+    "test/rails_test/config/initializers/too_rendermonkey.rb",
+    "test/rails_test/config/routes.rb",
+    "test/rails_test/db/schema.rb",
+    "test/rails_test/db/seeds.rb",
+    "test/rails_test/test/functional/pdf_render_test.rb",
+    "test/rails_test/test/test_helper.rb",
+    "test/rails_test/test/unit/initializer_test.rb",
+    "test/rails_test/test/unit/pdf_generator_test.rb",
+    "test/rails_test/test/unit/too_rendermonkey_css_test.rb",
+    "test/rails_test/test/unit/too_rendermonkey_test.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -60,25 +132,28 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.1"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rails>, ["~> 3.0.3"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.1"])
     else
       s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
       s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rails>, ["~> 3.0.3"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
     end
   else
     s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
     s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rails>, ["~> 3.0.3"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<rest-client>, ["~> 1.6.1"])
   end
 end
