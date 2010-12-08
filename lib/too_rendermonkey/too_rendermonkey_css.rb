@@ -1,6 +1,8 @@
+require 'logger'  
+
 module TooRendermonkeyCss
   
-  def stylesheet_tag_pdf stylesheet
+  def stylesheet_tag_pdf stylesheet    
     begin
       css_file = ""
       File.open("#{Rails.root.to_s}/public/stylesheets/#{stylesheet}.css", "r") {|f|
@@ -8,9 +10,9 @@ module TooRendermonkeyCss
       }
       "<style type=\"text/css\"> #{css_file} </style>".html_safe       
     rescue => err
-      puts "Exception: #{err}"
+      puts err.message
       "<style type=\"text/css\"></style>".html_safe
     end
-  end
+  end  
   
 end

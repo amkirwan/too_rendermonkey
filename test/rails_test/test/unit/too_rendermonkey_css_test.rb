@@ -1,7 +1,11 @@
-require 'test_helper'  
+require 'test_helper'
 
 class TooRendermonkeyCssTest < ActiveSupport::TestCase 
-  include TooRendermonkeyCss
+  include TooRendermonkeyCss  
+  
+  def setup
+    Rails.logger =Logger.new(STDOUT)
+  end 
   
   test "should return css style that is html safe" do
     css_file = ActionView::Base.new.stylesheet_tag_pdf("reports_pdf")

@@ -1,6 +1,6 @@
+require 'too_rendermonkey'
 require 'logger'
-
-require 'too_rendermonkey' 
+ 
 $:.unshift File.join(File.dirname(__FILE__)) 
 require "pdf_generator"
 require "too_rendermonkey_css"
