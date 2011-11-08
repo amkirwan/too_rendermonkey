@@ -6,3 +6,6 @@ TooRendermonkey.config = {
   #:api_key => "example1234example",
   #:hash_key => "example1234example"
 }
+
+TooRendermonkey.files = {
+}

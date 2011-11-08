@@ -10,7 +10,7 @@ require 'rest-client'
 # RendermonkeyToo
 module TooRendermonkey
   
-  mattr_accessor :config
+  mattr_accessor :config, :files
 
   def self.included(base)
     base.class_eval do
@@ -30,39 +30,28 @@ module TooRendermonkey
   private
    
   def make_pdf_erb(options = {})
-    options[:pdf_layout] ||= false
-    options[:pdf_template] ||= File.join(controller_path, action_name)
-    page = render_to_string(:template => options[:pdf_template], :layout => options[:pdf_layout])
-
-=begin
-    params = generate_params(options, page)
-    
-    url = URI.parse(@@config[:uri])
-    req = Net::HTTP::Post.new(url.path)
-    req.form_data = params
-    http = Net::HTTP.new(url.host, url.port)
-     #http.use_ssl = true
-    begin
-      response = http.start {|http| http.request(req)}
-      if response.content_type == "text/html"
-        logger.info '*'*15 +  response.body + '*'*15
+    if @@files[options[:tag].to_sym].nil?
+      options[:pdf_layout] ||= false
+      options[:pdf_template] ||= File.join(controller_path, action_name)
+      page = render_to_string(:template => options[:pdf_template], :layout => options[:pdf_layout])
+      params = generate_params(options, page)
+      begin
+        logger.info '*'*15 + 'GENERATE PDF' + '*'*15
+        response = RestClient.post @@config[:uri], params
+        @@files[options[:tag]] ||= response
+        send_data response, :type => 'application/pdf', :disposition => 'attachment'
+      rescue => e
+        logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
         render :file => "public/500.html"
-      else
-        send_data response.body, :type => 'pdf', :disposition => 'attachment'
       end
-    rescue => e
-      logger.info '*'*15 + "ERROR GENERATING PDF: " + e.message + '*'*15
-      render :file => "public/500.html"
-    end
-  end
-=end       
-    params = generate_params(options, page)
-    begin
-      response = RestClient.post @@config[:uri], params
-      send_data response, :type => 'application/pdf', :disposition => "#{response.headers[:content_disposition]}"
-    rescue => e
-      logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
-      render :file => "public/500.html"
+    else
+      begin
+        logger.info '*'*15 + 'MEMOIZE PDF' + '*'*15
+        send_data @@files[options[:tag]], :type => 'application/pdf', :disposition => 'attachment'
+      rescue => e
+        logger.info '*'*15 + "ERROR GENERATING PDF: " + '*'*15 
+        render :file => "public/500.html"
+      end
     end
   end
   
@@ -110,3 +99,4 @@ module TooRendermonkey
   end
     
 end
+
