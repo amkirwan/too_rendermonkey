@@ -38,7 +38,7 @@ module TooRendermonkey
       begin
         logger.info '*'*15 + 'GENERATE PDF' + '*'*15
         response = RestClient.post @@config[:uri], params
-        @@files[options[:tag].to_sym] ||= response
+        @@files[options[:tag]] ||= response
         send_data response, :type => 'application/pdf', :disposition => 'attachment'
       rescue => e
         logger.info '*'*15 + "ERROR GENERATING PDF: " + e.http_body + '*'*15 
@@ -47,7 +47,7 @@ module TooRendermonkey
     else
       begin
         logger.info '*'*15 + 'MEMOIZE PDF' + '*'*15
-        send_data @@files[options[:tag].to_sym], :type => 'application/pdf', :disposition => 'attachment'
+        send_data @@files[options[:tag]], :type => 'application/pdf', :disposition => 'attachment'
       rescue => e
         logger.info '*'*15 + "ERROR GENERATING PDF: " + '*'*15 
         render :file => "public/500.html"
